@@ -6,8 +6,8 @@ from os import system
 
 
 class File:
-    def __init__(self, position):
-        self.position_login = position
+    def __init__(self, _position):
+        self.position_login = _position
         self.position = None
         self.users = None
         self.data_base = None
