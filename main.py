@@ -4,7 +4,38 @@
 import csv
 from os import system
 
-
+class lessons:
+    def __init__(self,lesson,code) :
+        self.lesson=lesson
+        self.code=code
+    def centren():
+        choice=int(input('What operation do you want to do?\n 1.Add lesson\n 2. Delete lesson\n 3. Add lesson for student\n 4. Delete lesson for student'))
+        if choice==1:
+            lessons=[input('Enter the name of the lesson'),int(input('Enter the lesson code'))]
+            with open('lessons.csv','a',newline='') as file:
+                writer=csv.writer
+                writer.writerow(lessons)
+                file.close()
+                print('Information was recorded!')
+        elif choice==2:
+            lessons=[]
+            code=int(input('Enter the lesson code'))
+            with open('lessons.csv','r') as file:
+                reader=csv.reader(file)
+                for i in reader:
+                    lessons.append(i)
+                file.close()
+                for ii in lessons:
+                    if code==lessons[ii][0]:
+                        del lessons[ii]
+                        print('done!')
+        elif choice==3:
+            
+        elif choice==4:
+            pass
+        else:
+            print('Wrong number, try again')
+            #centre()
 class File:
     def __init__(self, _position):
         self.position_login = _position
