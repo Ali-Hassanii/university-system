@@ -10,8 +10,8 @@ class Lesson:
 
     def add(self):
         lesson_info = [
-            input('lesson code: '),
             input('lesson name: '),
+            input('lesson code: '),
             input('lesson unit(s): ')
         ]
         # TODO : check for unique lesson code : like my code from line 107 to 121 in class File()
@@ -20,20 +20,45 @@ class Lesson:
                 writer.writerow(lesson_info)
                 print('Information was recorded!')
     def edit(self):
-        pass
+        lesson_info=[]
+        lesson_code=int(input('Enter the lesson code: '))
+        with open('lessons.csv','r') as file:
+            reader=csv.reader(file)
+            for i in reader:
+                lesson_info.append(i)
+            for ii in range(0,len(lesson_info)):
+                if lesson_code==lesson_info[ii][1]:
+                    new_lesson_code=int(input('Enter the new lesson code:'))
+                    lesson_info[ii][1]=new_lesson_code
+        with open('lessons.csv','w',newline='') as file:
+                writer=csv.writer(file)
+                writer.writerows(lesson_code)
+                print('done!')
+                   
 
     def remove(self):
-        code=input('Enter the lesson code')
+        lesson_info=[]
+        lesson_code=input('Enter the lesson code:')
         with open('lessons.csv','r') as file:
-            lessons=csv.reader(file)
-            for lesson in lessons:
-                if code==lessons[lesson][0]:
-                    del lessons[lesson]
-                    print('done!')
+            reader=csv.reader(file)
+            for i in reader:
+                lesson_info.append(i)
+            for ii in lesson_info:
+                if lesson_code==lesson_info[ii][1]:
+                    del lesson_info[ii][1]
+            for n in lesson_info:
+                lesson_info.append(n)
+        with open('lessons.csv','w',newline='') as file:
+            writer=csv.writer(file)
+            writer.writerows(lesson_info)
+            print('done!')    
                     # TODO: file did not save yet : it is like delete() method in File() class
 
     def student_add(self):
-        pass
+
+        studet_id=int(input('Enter the student ID:'))
+        with open('employee.csv','r') as file:
+            reader=csv.reader(file)
 
     def student_remove(self):
         pass
