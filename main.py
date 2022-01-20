@@ -2,7 +2,7 @@
 # 6th Computer's Group
 #
 import csv
-from os import system
+from os import remove, system
 
 class Lesson:
     def __init__(self) :
