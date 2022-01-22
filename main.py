@@ -2,10 +2,11 @@
 # 6th Computer's Group
 #
 import csv
-from os import remove, system
+from os import system
+
 
 class Lesson:
-    def __init__(self) :
+    def __init__(self):
         pass
 
     def add(self):
@@ -14,51 +15,51 @@ class Lesson:
             input('lesson code: '),
             input('lesson unit(s): ')
         ]
-        # TODO : check for unique lesson code : like my code from line 107 to 121 in class File()
-        with open('lessons.csv','a',newline='') as file:
-                writer=csv.writer
-                writer.writerow(lesson_info)
-                print('Information was recorded!')
+        # TODO : check for unique lesson code
+        with open('lessons.csv', 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(lesson_info)
+            print('Information was recorded!')
+
     def edit(self):
-        lesson_info=[]
-        lesson_code=int(input('Enter the lesson code: '))
-        with open('lessons.csv','r') as file:
-            reader=csv.reader(file)
+        lesson_info = []
+        lesson_code = int(input('Enter the lesson code: '))
+        with open('lessons.csv', 'r') as file:
+            reader = csv.reader(file)
             for i in reader:
                 lesson_info.append(i)
-            for ii in range(0,len(lesson_info)):
-                if lesson_code==lesson_info[ii][1]:
-                    new_lesson_code=int(input('Enter the new lesson code:'))
-                    lesson_info[ii][1]=new_lesson_code
-        with open('lessons.csv','w',newline='') as file:
-                writer=csv.writer(file)
-                writer.writerows(lesson_code)
-                print('done!')
-                   
+            for ii in range(0, len(lesson_info)):
+                if lesson_code == lesson_info[ii][1]:
+                    new_lesson_code = int(input('Enter the new lesson code:'))
+                    lesson_info[ii][1] = new_lesson_code
+        with open('lessons.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerows(str(lesson_code))
+            print('done!')
 
     def remove(self):
-        lesson_info=[]
-        lesson_code=input('Enter the lesson code:')
-        with open('lessons.csv','r') as file:
-            reader=csv.reader(file)
+        lesson_info = []
+        lesson_code = input('Enter the lesson code:')
+        with open('lessons.csv', 'r') as file:
+            reader = csv.reader(file)
             for i in reader:
                 lesson_info.append(i)
             for ii in lesson_info:
-                if lesson_code==lesson_info[ii][1]:
+                if lesson_code == lesson_info[ii][1]:
                     del lesson_info[ii][1]
             for n in lesson_info:
                 lesson_info.append(n)
-        with open('lessons.csv','w',newline='') as file:
-            writer=csv.writer(file)
+        with open('lessons.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
             writer.writerows(lesson_info)
-            print('done!')    
-                    # TODO: file did not save yet : it is like delete() method in File() class
+            print('done!')
+            # TODO: file did not save yet : it is like delete() method in File() class
 
     def student_add(self):
 
-        studet_id=int(input('Enter the student ID:'))
-        with open('employee.csv','r') as file:
-            reader=csv.reader(file)
+        studet_id = int(input('Enter the student ID:'))
+        with open('employee.csv', 'r') as file:
+            reader = csv.reader(file)
 
     def student_remove(self):
         pass
