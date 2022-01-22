@@ -2,7 +2,66 @@
 # 6th Computer's Group
 #
 import csv
-from os import system
+from os import remove, system
+
+class Lesson:
+    def __init__(self) :
+        pass
+
+    def add(self):
+        lesson_info = [
+            input('lesson name: '),
+            input('lesson code: '),
+            input('lesson unit(s): ')
+        ]
+        # TODO : check for unique lesson code : like my code from line 107 to 121 in class File()
+        with open('lessons.csv','a',newline='') as file:
+                writer=csv.writer
+                writer.writerow(lesson_info)
+                print('Information was recorded!')
+    def edit(self):
+        lesson_info=[]
+        lesson_code=int(input('Enter the lesson code: '))
+        with open('lessons.csv','r') as file:
+            reader=csv.reader(file)
+            for i in reader:
+                lesson_info.append(i)
+            for ii in range(0,len(lesson_info)):
+                if lesson_code==lesson_info[ii][1]:
+                    new_lesson_code=int(input('Enter the new lesson code:'))
+                    lesson_info[ii][1]=new_lesson_code
+        with open('lessons.csv','w',newline='') as file:
+                writer=csv.writer(file)
+                writer.writerows(lesson_code)
+                print('done!')
+                   
+
+    def remove(self):
+        lesson_info=[]
+        lesson_code=input('Enter the lesson code:')
+        with open('lessons.csv','r') as file:
+            reader=csv.reader(file)
+            for i in reader:
+                lesson_info.append(i)
+            for ii in lesson_info:
+                if lesson_code==lesson_info[ii][1]:
+                    del lesson_info[ii][1]
+            for n in lesson_info:
+                lesson_info.append(n)
+        with open('lessons.csv','w',newline='') as file:
+            writer=csv.writer(file)
+            writer.writerows(lesson_info)
+            print('done!')    
+                    # TODO: file did not save yet : it is like delete() method in File() class
+
+    def student_add(self):
+
+        studet_id=int(input('Enter the student ID:'))
+        with open('employee.csv','r') as file:
+            reader=csv.reader(file)
+
+    def student_remove(self):
+        pass
 
 
 class File:
@@ -129,37 +188,56 @@ class File:
         input('delete was successful!\npress the enter key to continue ...')
 
 
-class Employee:
-    def __init__(self):
-        file = File('employee')
-        user = file.login()
-        while True:
-            print(f' $ Employee $ {user[3]}, {user[2]}\n[1]')
-            print(
-                '[1] manage users\n'
-                '[2] manage lessons\n'
-                '[0] exit'
-            )
-            option = input('=> ').strip()
-            match option:
-                case '1':
-                    system('cls')
-                    print(
-                        ' $ manage users $\n'
-                        '[1] register a new user\n'
-                        '[2] edit an existing user account\n'
-                        '[3] delete an existing user account'
-                    )
-                    option = input('=> ').strip()
-                    match option:
-                        case '1':
-                            file.registry()
-                        case '2':
-                            file.edit()
-                        case '3':
-                            file.delete()
-                case '0':
-                    exit()
+def employee():
+    file = File('employee')
+    user = file.login()
+    while True:
+        print(f' $ Employee $ {user[3]}, {user[2]}\n[1]')
+        print(
+            '[1] manage users\n'
+            '[2] manage lessons\n'
+            '[0] exit'
+        )
+        option = input('=> ').strip()
+        match option:
+            case '1':
+                system('cls')
+                print(
+                    ' $ manage users $\n'
+                    '[1] register a new user\n'
+                    '[2] edit an existing user account\n'
+                    '[3] delete an existing user account'
+                )
+                option = input('=> ').strip()
+                match option:
+                    case '1':
+                        file.registry()
+                    case '2':
+                        file.edit()
+                    case '3':
+                        file.delete()
+            case '2':
+                lesson = Lesson()
+                system('cls')
+                print(
+                    ' $ manage lessons $\n'
+                    '1. Add lesson\n'
+                    '2. Edit lesson\n'
+                    '3. Delete lesson\n'
+                    '4. Add lesson for student\n'
+                    '5. Delete lesson for student'
+                )
+                option = input('=> ').strip()
+                match option:
+                    case '1':
+                        lesson.add()
+                    case '2':
+                        lesson.edit()
+                    case '3':
+                        lesson.remove()
+
+            case '0':
+                exit()
 
 
 if __name__ == '__main__':
@@ -175,4 +253,4 @@ if __name__ == '__main__':
 
     match position:
         case '1':
-            employee = Employee()
+            employee()
